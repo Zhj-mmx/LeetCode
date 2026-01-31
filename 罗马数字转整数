@@ -62,3 +62,23 @@ class Solution:
 
 #思路是差不多的，对规则的进行归纳概括，而且概括的规则是一样的（字符大于后面字符就加上该字符的值，反之减去），但我问题出在没有用字典而是错误地尝试用字符串调用数值，，，
 #而且双遍历的方法很有用且优雅
+#我最后的解法
+Roman = {
+    'I': 1,
+    'V': 5,
+    'X': 10,
+    'L': 50,
+    'C': 100,
+    'D': 500,
+    'M': 1000,
+}
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        num = 0 
+        for i in range(len(s) - 1):
+            num += Roman[s[i]] if Roman[s[i]] >= Roman[s[i+1]] else  -Roman[s[i]]
+        return num + Roman[s[-1]]
